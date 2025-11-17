@@ -1,0 +1,43 @@
+# Jekyll 配置文件
+title: "我的博客"
+description: "技术分享、生活随笔、游戏测评"
+author: "Your Name"
+email: "your.email@example.com"
+url: "https://sugarnb.github.io"  # 请替换为你的GitHub用户名
+baseurl: ""  # 如果使用项目页面，填写项目名
+
+# 插件
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+# 构建设置
+markdown: kramdown
+highlighter: rouge
+permalink: /:categories/:title/
+
+# 分类和标签
+collections:
+  categories:
+    output: true
+    permalink: /:collection/:name/
+  tags:
+    output: true
+    permalink: /:collection/:name/
+
+# 排除文件
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+
+# 主题设置
+theme: null
+
+# 社交链接（可选）
+social:
+  github: "your-github-username"
+  twitter: ""
+  email: "your.email@example.com"

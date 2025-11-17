@@ -1,0 +1,87 @@
+---
+layout: default
+title: 标签
+---
+
+<div class="tags-page">
+    <div class="container">
+        <header class="page-header">
+            <h1><i class="fas fa-tags"></i> 所有标签</h1>
+        </header>
+
+        <div class="tags-cloud">
+            {% assign all_tags = site.posts | map: 'tags' | flatten | uniq | sort %}
+            {% for tag in all_tags %}
+            {% assign tag_posts = site.posts | where_exp: "post", "post.tags contains tag" %}
+            <a href="#tag-{{ tag | slugify }}" class="tag-link" data-tag="{{ tag }}">
+                {{ tag }}
+                <span class="tag-count">({{ tag_posts.size }})</span>
+            </a>
+            {% endfor %}
+        </div>
+
+        <div class="tags-list">
+            {% for tag in all_tags %}
+            <section class="tag-section" id="tag-{{ tag | slugify }}">
+                <h2>
+                    <i class="fas fa-tag"></i>
+                    {{ tag }}
+                    <span class="post-count">({{ site.posts | where_exp: "post", "post.tags contains tag" | size }})</span>
+                </h2>
+                <div class="posts-list">
+                    {% assign tag_posts = site.posts | where_exp: "post", "post.tags contains tag" %}
+                    {% for post in tag_posts %}
+                    <article class="post-card">
+                        <div class="post-card-header">
+                            <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+                            <time datetime="{{ post.date | date: '%Y-%m-%d' }}">
+                                {{ post.date | date: "%Y年%m月%d日" }}
+                            </time>
+                        </div>
+                        <p class="post-card-excerpt">{{ post.excerpt | strip_html | truncate: 150 }}</p>
+                        <div class="post-card-footer">
+                            {% if post.categories.size > 0 %}
+                            <span class="post-card-category">
+                                <i class="fas fa-folder"></i>
+                                <a href="{{ '/categories/' | append: post.categories.first | relative_url }}">
+                                    {{ post.categories.first }}
+                                </a>
+                            </span>
+                            {% endif %}
+                        </div>
+                    </article>
+                    {% endfor %}
+                </div>
+            </section>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<script>
+// 标签链接平滑滚动
+document.querySelectorAll('.tag-link').forEach(link => {
+    link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+            targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            // 高亮显示
+            targetElement.style.animation = 'highlight 1s ease';
+        }
+    });
+});
+
+// 添加高亮动画
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes highlight {
+        0% { background-color: var(--card-bg); }
+        50% { background-color: var(--primary-color); opacity: 0.2; }
+        100% { background-color: var(--card-bg); }
+    }
+`;
+document.head.appendChild(style);
+</script>
+

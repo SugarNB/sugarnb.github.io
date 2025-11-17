@@ -1,0 +1,65 @@
+---
+layout: default
+---
+<div class="home">
+    <div class="container">
+        <section class="hero">
+            <h1 class="hero-title">欢迎来到我的博客</h1>
+            <p class="hero-subtitle">{{ site.description }}</p>
+        </section>
+
+        <section class="categories-preview">
+            <h2><i class="fas fa-th-large"></i> 文章分类</h2>
+            <div class="category-cards">
+                <a href="{{ '/categories/技术分享' | relative_url }}" class="category-card tech">
+                    <i class="fas fa-code"></i>
+                    <h3>技术分享</h3>
+                    <p>编程技巧、技术心得</p>
+                </a>
+                <a href="{{ '/categories/生活随笔' | relative_url }}" class="category-card life">
+                    <i class="fas fa-heart"></i>
+                    <h3>生活随笔</h3>
+                    <p>日常感悟、生活记录</p>
+                </a>
+                <a href="{{ '/categories/游戏测评' | relative_url }}" class="category-card game">
+                    <i class="fas fa-gamepad"></i>
+                    <h3>游戏测评</h3>
+                    <p>游戏体验、评测分享</p>
+                </a>
+            </div>
+        </section>
+
+        <section class="recent-posts">
+            <h2><i class="fas fa-newspaper"></i> 最新文章</h2>
+            <div class="posts-list">
+                {% for post in site.posts limit: 10 %}
+                <article class="post-card">
+                    <div class="post-card-header">
+                        <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+                        <time datetime="{{ post.date | date: '%Y-%m-%d' }}">
+                            {{ post.date | date: "%Y年%m月%d日" }}
+                        </time>
+                    </div>
+                    <p class="post-card-excerpt">{{ post.excerpt | strip_html | truncate: 150 }}</p>
+                    <div class="post-card-footer">
+                        {% if post.categories.size > 0 %}
+                        <span class="post-card-category">
+                            <i class="fas fa-folder"></i>
+                            {{ post.categories.first }}
+                        </span>
+                        {% endif %}
+                        {% if post.tags.size > 0 %}
+                        <span class="post-card-tags">
+                            {% for tag in post.tags limit: 3 %}
+                            <span class="tag">{{ tag }}</span>
+                            {% endfor %}
+                        </span>
+                        {% endif %}
+                    </div>
+                </article>
+                {% endfor %}
+            </div>
+        </section>
+    </div>
+</div>
+

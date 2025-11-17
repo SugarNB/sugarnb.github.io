@@ -1,0 +1,68 @@
+---
+layout: default
+title: 404 - 页面未找到
+---
+
+<div class="error-page">
+    <div class="container">
+        <div class="error-content">
+            <h1>404</h1>
+            <h2>页面未找到</h2>
+            <p>抱歉，您访问的页面不存在。</p>
+            <a href="{{ '/' | relative_url }}" class="back-home-btn">
+                <i class="fas fa-home"></i>
+                返回首页
+            </a>
+        </div>
+    </div>
+</div>
+
+<style>
+.error-page {
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.error-content {
+    text-align: center;
+    padding: 3rem;
+}
+
+.error-content h1 {
+    font-size: 6rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.error-content h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.error-content p {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+}
+
+.back-home-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 2rem;
+    background: var(--primary-color);
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.back-home-btn:hover {
+    background: var(--primary-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+}
+</style>
+

@@ -1,0 +1,45 @@
+---
+layout: default
+title: 搜索
+---
+
+<div class="search-page">
+    <div class="container">
+        <header class="page-header">
+            <h1><i class="fas fa-search"></i> 站内搜索</h1>
+        </header>
+
+        <div class="search-box-container">
+            <div class="search-box">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" id="searchInput" placeholder="输入关键词搜索文章..." autocomplete="off">
+                <button id="clearSearch" class="clear-btn" style="display: none;">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+
+        <div id="searchResults" class="search-results"></div>
+        <div id="searchNoResults" class="search-no-results" style="display: none;">
+            <i class="fas fa-search"></i>
+            <p>没有找到相关文章，试试其他关键词吧~</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    // 搜索数据
+    const searchData = [
+        {% for post in site.posts %}
+        {
+            title: {{ post.title | jsonify }},
+            url: {{ post.url | relative_url | jsonify }},
+            excerpt: {{ post.excerpt | strip_html | truncate: 200 | jsonify }},
+            date: {{ post.date | date: "%Y年%m月%d日" | jsonify }},
+            categories: {{ post.categories | jsonify }},
+            tags: {{ post.tags | jsonify }}
+        }{% unless forloop.last %},{% endunless %}
+        {% endfor %}
+    ];
+</script>
+
