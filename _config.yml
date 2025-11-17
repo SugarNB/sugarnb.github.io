@@ -1,8 +1,8 @@
 # Jekyll 配置文件
 title: "我的博客"
 description: "技术分享、生活随笔、游戏测评"
-author: "Your Name"
-email: "your.email@example.com"
+author: "sugar"
+email: ""
 url: "https://sugarnb.github.io"  # 请替换为你的GitHub用户名
 baseurl: ""  # 如果使用项目页面，填写项目名
 
@@ -38,6 +38,7 @@ theme: null
 
 # 社交链接（可选）
 social:
-  github: "your-github-username"
+  github: "SugarNB"
   twitter: ""
-  email: "your.email@example.com"
+  email: ""
+
